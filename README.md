@@ -20,13 +20,19 @@ Below, the first table is of all of the temperatures recorded within the month o
 Overall, the results from the data are relatively within the same temperature ranges. Most of the statistics are only a few numbers away from eachother in diffrence. Most of the differences are from the the collection of the data than the temperature data itself. 
 More queries can be made from this data by changing the month you are intersted in looking at or if you were interested in looking a precipitation or or a previous year's weather data. A lot of these lines of code can be slightly refractored.
 
+####  Create a DataFrame from the list of temperatures for the month of December. Though this can be changed to be any month. For example if we wanted the month of November instead of the 12, change it to an 11 and change the variables to resemble the month of November instead.
+Dec_temp = []
+Dec_temp =  session.query(Measurement.date, Measurement.tobs).filter(extract('month', Measurement.date) == 12)
+print(Dec_temp)
+Dec_df = pd.DataFrame(dec_temperature, columns=['date', 'December Temps'])
+display(Dec_df)
 
 
-# Design a query to retrieve the last 12 months of precipitation data and plot the results. 
+#### Design a query to retrieve the last 12 months of precipitation data and plot the results. 
 #Starting from the last data point in the database. 
 prev_year = dt.date(2017, 8, 23)
-# Calculate the date one year from the last date in data set.
+#### Calculate the date one year from the last date in data set.
 prev_year = dt.date(2017, 8, 23) - dt.timedelta(days=365)
-# Perform a query to retrieve the data and precipitation scores
+#### Perform a query to retrieve the data and precipitation scores
 results = session.query(Measurement.date, Measurement.prcp).filter(Measurement.date >= prev_year).all()
 #print(results)
